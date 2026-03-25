@@ -14,6 +14,9 @@ function FormPage() {
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const navigate = useNavigate();
 
+  // ✅ BASE URL (added)
+  const API = "https://employee-9uvq.onrender.com/api/employees";
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -43,7 +46,8 @@ function FormPage() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/employees", form);
+      // ✅ UPDATED API
+      await axios.post(API, form);
 
       showToast("Employee added successfully!", "success");
 
@@ -80,7 +84,6 @@ function FormPage() {
         {/* Form */}
         <form className="p-6 grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit}>
 
-          {/* Input Style */}
           {[
             { name: "name", placeholder: "Full Name" },
             { name: "email", placeholder: "Email", type: "email" },

@@ -9,10 +9,13 @@ function ListPage() {
   const [employees, setEmployees] = useState([]);
   const [search, setSearch] = useState("");
 
+  // ✅ BASE URL (added)
+  const API = "https://employee-9uvq.onrender.com/api/employees";
+
   // Fetch data
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/employees");
+      const res = await axios.get(API);
       setEmployees(res.data);
     } catch (err) {
       console.log(err);

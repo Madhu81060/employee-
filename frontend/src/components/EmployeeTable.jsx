@@ -9,9 +9,12 @@ function EmployeeTable({ data = [], refresh }) {
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
+  // ✅ BASE URL (added)
+  const API = "https://employee-9uvq.onrender.com/api/employees";
+
   // Fetch (fallback if no props)
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5000/api/employees");
+    const res = await axios.get(API);
     setTableData(res.data);
   };
 
@@ -33,7 +36,7 @@ function EmployeeTable({ data = [], refresh }) {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/employees/${editId}`,
+        `${API}/${editId}`,
         editData
       );
       setEditId(null);
@@ -52,7 +55,7 @@ function EmployeeTable({ data = [], refresh }) {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/employees/${deleteId}`
+        `${API}/${deleteId}`
       );
       setShowModal(false);
       refresh ? refresh() : fetchData();
